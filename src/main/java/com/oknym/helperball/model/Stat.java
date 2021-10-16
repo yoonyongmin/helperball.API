@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "helperball")
 @Getter
 @Setter
 public class Stat {
@@ -39,7 +38,7 @@ public class Stat {
 	@JoinColumn
 	private Long intercept;
 	
-	@ManyToOne
-	private User user;
+//	@ManyToOne
+//	private User user;
 
 }

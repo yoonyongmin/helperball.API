@@ -16,7 +16,6 @@ import lombok.Setter;
 import lombok.Getter;
 
 @Entity
-@Table(name = "helperball")
 @Getter
 @Setter
 public class User {
@@ -28,7 +27,7 @@ public class User {
 	@JoinColumn
 	private String name;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-	private List<Stat> stat;
+//	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+//	private List<Stat> stat;
 
 }
