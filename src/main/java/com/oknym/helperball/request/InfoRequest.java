@@ -1,9 +1,5 @@
 package com.oknym.helperball.request;
 
-import java.util.Date;
-
-import com.oknym.helperball.model.Position;
-
 import lombok.Getter;
 import lombok.Setter;
 
