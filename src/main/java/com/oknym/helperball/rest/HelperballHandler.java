@@ -1,9 +1,5 @@
 package com.oknym.helperball.rest;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,13 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.oknym.helperball.model.Position;
 import com.oknym.helperball.model.User;
-import com.oknym.helperball.request.InfoRequest;
 import com.oknym.helperball.service.HelperballService;
 
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping(value = "/hb/v1")
@@ -34,7 +27,7 @@ public class HelperballHandler {
 		return this.helperballService;
 	}
 	
-	
+
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	@ApiOperation(value = "Read User List", notes = "Read User List")
 	public ResponseEntity<?> selectUser() {
@@ -73,6 +66,15 @@ public class HelperballHandler {
 		HelperballService helperballService = getHelperballService();
 		
 		return ResponseEntity.ok(helperballService.selectFoot());
+	}
+
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@ApiOperation(value = "Save User", notes = "Save User")
+	public ResponseEntity<?> saveUser(@RequestBody User user) {
+		HelperballService helperballService = getHelperballService();
+		user = helperballService.saveUser(user);
+		
+		return ResponseEntity.ok(user);
 	}
 	
 //	@RequestMapping(value = "/info", method = RequestMethod.POST)

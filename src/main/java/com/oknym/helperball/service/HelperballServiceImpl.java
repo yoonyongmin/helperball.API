@@ -1,12 +1,10 @@
 package com.oknym.helperball.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.oknym.helperball.model.Foot;
@@ -14,7 +12,6 @@ import com.oknym.helperball.model.Info;
 import com.oknym.helperball.model.Position;
 import com.oknym.helperball.model.Stat;
 import com.oknym.helperball.model.User;
-import com.oknym.helperball.request.InfoRequest;
 
 @Service
 @Transactional
@@ -88,6 +85,23 @@ public class HelperballServiceImpl implements HelperballService {
 	@Override
 	public List<Foot> selectFoot() {
 		return (List<Foot>) footRepository.findAll();
+	}
+	
+	@Override
+	public User saveUser(User user) {
+		System.out.println(user.getToken());
+		System.out.println(user.getName());
+		System.out.println(user.getEmail());
+		
+		User saveUser = new User();
+		
+		saveUser.setToken(user.getToken());
+		saveUser.setName(user.getName());
+		saveUser.setEmail(user.getEmail());
+		
+		userRepository.save(saveUser);
+		
+		return saveUser;
 	}
 	
 //	@Override
