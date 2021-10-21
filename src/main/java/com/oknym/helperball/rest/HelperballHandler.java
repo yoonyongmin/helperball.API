@@ -69,10 +69,10 @@ public class HelperballHandler {
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	@ApiOperation(value = "Save User", notes = "Save User")
-	public ResponseEntity<?> saveUser(@RequestBody User user) {
+	@ApiOperation(value = "User Authentication", notes = "User Authentication")
+	public ResponseEntity<?> userAuthentication(@RequestBody User user) {
 		HelperballService helperballService = getHelperballService();
-		user = helperballService.saveUser(user);
+		user = helperballService.userAuthentication(user);
 		
 		return ResponseEntity.ok(user);
 	}

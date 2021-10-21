@@ -16,6 +16,6 @@ public interface HelperballService {
 	List<Position> selectPosition();
 	List<Foot> selectFoot();
 //	InfoRequest saveInfo(InfoRequest infoRequest);
-	User saveUser(User user);
+	User userAuthentication(User user);
 
 }
