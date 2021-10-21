@@ -24,26 +24,26 @@ public class Stat {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "goal")
+	@Column(name = "GOAL")
 	private Long goal;
 
-	@Column(name = "shoot")
+	@Column(name = "SHOOT")
 	private Long shoot;
 
-	@Column(name = "assist")
+	@Column(name = "ASSIST")
 	private Long assist;
 
-	@Column(name = "pass")
+	@Column(name = "PASS")
 	private Long pass;
 
-	@Column(name = "tackle")
+	@Column(name = "TACKLE")
 	private Long tackle;
 
-	@Column(name = "intercept")
+	@Column(name = "INTERCEPT")
 	private Long intercept;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "USER_ID")
 	private User user;
 
 }

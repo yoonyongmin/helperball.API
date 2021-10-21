@@ -41,13 +41,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "token")
+	@Column(name = "TOKEN")
 	private String token;
 	
-	@Column(name = "name")
+	@Column(name = "NAME")
 	private String name;
 	
-	@Column(name = "email")
+	@Column(name = "EMAIL")
 	private String email;
 	
 //	@Column(name = "email")

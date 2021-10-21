@@ -30,25 +30,25 @@ public class Info {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "weight")
+	@Column(name = "WEIGHT")
 	private int weight;
 	
-	@Column(name = "height")
+	@Column(name = "HEIGHT")
 	private int height;
 	
-	@Column(name = "age")
+	@Column(name = "AGE")
 	private Date age;
 	
 	@ManyToOne
-	@JoinColumn(name = "foot_id")
-	private Foot foot;
+	@JoinColumn(name = "USER_ID")
+	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "position_id")
+	@JoinColumn(name = "POSITION_ID")
 	private Position position;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@JoinColumn(name = "FOOT_ID")
+	private Foot foot;
 	
 }

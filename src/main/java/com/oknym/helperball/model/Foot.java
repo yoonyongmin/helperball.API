@@ -22,7 +22,7 @@ public class Foot {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "name")
+	@Column(name = "NAME")
 	private String name;
 	
 }
