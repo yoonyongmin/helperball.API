@@ -77,7 +77,7 @@ public class HelperballHandler {
 		return ResponseEntity.ok(helperballService.selectFoot());
 	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/oauth", method = RequestMethod.POST)
 	@ApiOperation(value = "User Authentication", notes = "User Authentication")
 	public ResponseEntity<?> userAuthentication(@RequestBody User user) {
 		HelperballService helperballService = getHelperballService();
