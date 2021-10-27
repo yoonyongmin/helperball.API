@@ -100,14 +100,14 @@ public class HelperballServiceImpl implements HelperballService {
 	
 	@Override
 	public User userAuthentication(User user) {
-		System.out.println(user.getToken());
+		System.out.println(user.getUserId());
 		System.out.println(user.getName());
 		System.out.println(user.getEmail());
 		
 		UserRepository userRepository = getUserRepository();
 		User saveUser = new User();
 		
-		saveUser.setToken(user.getToken());
+		saveUser.setUserId(user.getUserId());
 		saveUser.setName(user.getName());
 		saveUser.setEmail(user.getEmail());
 		
