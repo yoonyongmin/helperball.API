@@ -19,5 +19,6 @@ public interface HelperballService {
 //	InfoRequest saveInfo(InfoRequest infoRequest);
 	User userAuthentication(User user);
 	Optional<User> selectUserAuthentication(String token);
+	void sendMail();
 
 }

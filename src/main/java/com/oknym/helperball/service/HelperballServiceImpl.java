@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.oknym.helperball.model.Foot;
@@ -19,6 +21,9 @@ import com.oknym.helperball.model.User;
 @Transactional
 public class HelperballServiceImpl implements HelperballService {
 
+	@Autowired
+	private JavaMailSender javaMailSender;
+	
 	UserRepository userRepository;
 	@Autowired
 	public void setUserRepository(UserRepository userRepository) {
@@ -114,6 +119,15 @@ public class HelperballServiceImpl implements HelperballService {
 		userRepository.save(saveUser);
 		
 		return saveUser;
+	}
+	
+	@Override
+	public void sendMail() {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo("dydals361@gamil.com");
+		message.setSubject("세렝게티에서 사용할 임시 비밀번호 입니다.");
+		message.setText("제발 보내죠");
+		javaMailSender.send(message);
 	}
 	
 //	@Override

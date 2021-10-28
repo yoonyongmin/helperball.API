@@ -86,6 +86,11 @@ public class HelperballHandler {
 		return ResponseEntity.ok(user);
 	}
 	
+	@RequestMapping(value = "/mail", method = RequestMethod.POST)
+	public void sendMail() {
+		helperballService.sendMail();
+	}
+	
 //	@RequestMapping(value = "/info", method = RequestMethod.POST)
 //	@ApiOperation(value = "Create User", notes = "Create User")
 //	public ResponseEntity<?> saveInfo(@ApiParam(name = "weight") int weight,
