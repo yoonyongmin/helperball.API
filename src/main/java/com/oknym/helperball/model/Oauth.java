@@ -27,7 +27,7 @@ public class Oauth {
 	
 	@ManyToOne
 	@JoinColumn(name = "USER_ID")
-	private String userId;
+	private User user;
 	
 	@Column(name = "WEB")
 	private String web;
