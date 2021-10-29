@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oknym.helperball.model.User;
@@ -37,14 +36,6 @@ public class HelperballHandler {
 		return ResponseEntity.ok(helperballService.selectUser());
 	}
 
-	@RequestMapping(value = "/user/token", method = RequestMethod.GET)
-	@ApiOperation(value = "Read User List", notes = "Read User List")
-	public ResponseEntity<?> selectUserAuthentication(@RequestParam(value = "token") String token) {
-		HelperballService helperballService = getHelperballService();
-		
-		return ResponseEntity.ok(helperballService.selectUserAuthentication(token));
-	}
-	
 	@RequestMapping(value = "/stat", method = RequestMethod.GET)
 	@ApiOperation(value = "Read Stat List", notes = "Read Stat List")
 	public ResponseEntity<?> selectStat() {

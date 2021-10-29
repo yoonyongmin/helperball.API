@@ -1,7 +1,6 @@
 package com.oknym.helperball.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.oknym.helperball.model.Foot;
 import com.oknym.helperball.model.Info;
@@ -16,9 +15,6 @@ public interface HelperballService {
 	List<Info> selectInfo();
 	List<Position> selectPosition();
 	List<Foot> selectFoot();
-//	InfoRequest saveInfo(InfoRequest infoRequest);
 	User userAuthentication(User user);
-	Optional<User> selectUserAuthentication(String token);
-	void sendMail();
 
 }

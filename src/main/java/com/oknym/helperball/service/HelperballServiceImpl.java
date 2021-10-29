@@ -1,12 +1,10 @@
 package com.oknym.helperball.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -95,26 +93,15 @@ public class HelperballServiceImpl implements HelperballService {
 	}
 	
 	@Override
-	public Optional<User> selectUserAuthentication(String token) {
-		
-		UserRepository userRepository = getUserRepository();
-		Optional<User> res = userRepository.findByToken(token);
-		
-		return res;
-	}
-	
-	@Override
 	public User userAuthentication(User user) {
 		System.out.println(user.getUserId());
 		System.out.println(user.getName());
-		System.out.println(user.getEmail());
 		
 		UserRepository userRepository = getUserRepository();
 		User saveUser = new User();
 		
 		saveUser.setUserId(user.getUserId());
 		saveUser.setName(user.getName());
-		saveUser.setEmail(user.getEmail());
 		
 		userRepository.save(saveUser);
 		
