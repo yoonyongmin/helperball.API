@@ -110,11 +110,29 @@ public class HelperballServiceImpl implements HelperballService {
 	
 	@Override
 	public void sendMail() {
+		System.out.println("여기까진왔음");
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo("dydals361@gamil.com");
+		
+		message.setTo("dydals361@gmail.com", "dydalszhffk@naver.com", "yoonyongmin@aifrica.co.kr");
 		message.setSubject("세렝게티에서 사용할 임시 비밀번호 입니다.");
 		message.setText("제발 보내죠");
 		javaMailSender.send(message);
+	}
+	
+	@Override
+	public List<User> sendMail(User user) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		System.out.println("여기까진왔음");
+		
+		String userId = user.getUserId();
+		String userName = user.getName();
+		
+		message.setTo(userId);
+		message.setSubject("세렝게티에서 사용할 임시 비밀번호 입니다.");
+		message.setText("제발 보내죠");
+		javaMailSender.send(message);
+		
+		return (List<User>) userRepository.findAll();
 	}
 	
 //	@Override
