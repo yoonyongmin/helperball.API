@@ -2,10 +2,10 @@ package com.oknym.helperball.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oknym.helperball.model.User;
@@ -65,7 +65,6 @@ public class HelperballHandler {
 	@ApiOperation(value = "Read Foot List", notes = "Read Foot List")
 	public ResponseEntity<?> selectFoot() {
 		HelperballService helperballService = getHelperballService();
-		helperballService.sendMail();
 		
 		return ResponseEntity.ok(helperballService.selectFoot());
 	}
@@ -79,16 +78,12 @@ public class HelperballHandler {
 		return ResponseEntity.ok(user);
 	}
 	
-	@RequestMapping(value = "/oauth/mail", method = RequestMethod.POST)
-	public ResponseEntity<?> sendMail(@RequestBody User user) {
-		System.out.println(user.getUserId());
-		System.out.println(user.getName());
-		
-		HelperballService helperballService = getHelperballService();
-		
-		helperballService.sendMail(user);
-
-		return ResponseEntity.ok(helperballService.selectUser());
+	@RequestMapping(value = "/mail", method = RequestMethod.POST)
+	public void sendMail(
+			@RequestParam(name = "email") String email,
+			@RequestParam(name = "name") String name,
+			@RequestParam(name = "certification") String certification) {
+		helperballService.sendMail(email, name, certification);
 	}
 	
 //	@RequestMapping(value = "/info", method = RequestMethod.POST)
