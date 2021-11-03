@@ -68,6 +68,21 @@ public class HelperballHandler {
 		
 		return ResponseEntity.ok(helperballService.selectFoot());
 	}
+	
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@ApiOperation(value = "Save User", notes = "Save User")
+	public void saveUser(@RequestBody User user) {
+		HelperballService helperballService = getHelperballService();
+		helperballService.save(user);
+	}
+	
+	@RequestMapping(value = "/user/authentication", method = RequestMethod.POST)
+	@ApiOperation(value = "Save User", notes = "Save User")
+	public ResponseEntity<?> doubleCheckUserId(@RequestParam(name = "id") String id) {
+		HelperballService helperballService = getHelperballService();
+		
+		return ResponseEntity.ok(helperballService.authenticationUserId(id));
+	}
 
 	@RequestMapping(value = "/user/oauth", method = RequestMethod.POST)
 	@ApiOperation(value = "Oauth User Authentication", notes = "Oauth User Authentication")
