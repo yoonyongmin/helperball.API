@@ -15,7 +15,9 @@ public interface HelperballService {
 	List<Info> selectInfo();
 	List<Position> selectPosition();
 	List<Foot> selectFoot();
-	User userAuthentication(User user);
+	User oauthUserAuthentication(User user);
+	User authenticationUserId(String id);
+	
 	void sendMail(String email, String name, String certification);
 
 }

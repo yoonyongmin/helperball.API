@@ -109,6 +109,15 @@ public class HelperballServiceImpl implements HelperballService {
 	}
 	
 	@Override
+	public User authenticationUserId(String id) {
+		if (userRepository.findByUserId(id) == null) {
+			return null;
+		} else {
+			return userRepository.findByUserId(id);
+		}
+	}
+	
+	@Override
 	public void sendMail(String email, String name, String certification) {
 		System.out.println("여기까진왔음");
 		System.out.println(email);
