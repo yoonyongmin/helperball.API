@@ -70,10 +70,10 @@ public class HelperballHandler {
 	}
 
 	@RequestMapping(value = "/user/oauth", method = RequestMethod.POST)
-	@ApiOperation(value = "User Authentication", notes = "User Authentication")
-	public ResponseEntity<?> userAuthentication(@RequestBody User user) {
+	@ApiOperation(value = "Oauth User Authentication", notes = "Oauth User Authentication")
+	public ResponseEntity<?> oauthUserAuthentication(@RequestBody User user) {
 		HelperballService helperballService = getHelperballService();
-		user = helperballService.userAuthentication(user);
+		user = helperballService.oauthUserAuthentication(user);
 		
 		return ResponseEntity.ok(user);
 	}
