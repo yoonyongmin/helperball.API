@@ -4,13 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -37,10 +35,11 @@ public class Info {
 	private int height;
 	
 	@Column(name = "AGE")
-	private Date age;
+	private int age;
 	
 	@ManyToOne
 	@JoinColumn(name = "USER_ID")
+	@JsonBackReference
 	private User user;
 	
 	@ManyToOne
@@ -50,5 +49,9 @@ public class Info {
 	@ManyToOne
 	@JoinColumn(name = "FOOT_ID")
 	private Foot foot;
-	
+
+	public void setUser(String userId) {
+		
+	}
+
 }
