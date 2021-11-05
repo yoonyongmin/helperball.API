@@ -93,12 +93,27 @@ public class HelperballServiceImpl implements HelperballService {
 	}
 	
 	@Override
-	public void save(User user) {
+	public void save(User user) {		
+		System.out.println(user.getUserId());
+		System.out.println(user.getName());
+		System.out.println(user.getPassword());
+		
+		Info info = new Info();
+		Stat stat = new Stat();
 		User usersave = new User();
+		
+		info.setUser(user.getUserId());
+		stat.setUser(user.getUserId());
+
 		usersave.setUserId(user.getUserId());
 		usersave.setName(user.getName());
+		usersave.setPassword(user.getPassword());
+		usersave.setInfo(info);
+		usersave.setStat(stat);
 		
 		userRepository.save(usersave);
+		infoRepository.save(info);
+		statRepository.save(stat);
 	}
 	
 	@Override
