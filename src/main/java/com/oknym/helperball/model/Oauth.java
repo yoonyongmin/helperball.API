@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,9 +23,9 @@ public class Oauth {
 	@Column(name = "ID")
 	private int id;
 	
-	@ManyToOne
-	@JoinColumn(name = "USER_ID")
-	private User user;
+//	@ManyToOne
+//	@JoinColumn(name = "USER_ID")
+//	private User user;
 	
 	@Column(name = "WEB")
 	private String web;
