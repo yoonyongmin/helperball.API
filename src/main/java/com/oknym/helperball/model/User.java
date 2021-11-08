@@ -2,6 +2,7 @@ package com.oknym.helperball.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,16 +28,11 @@ public class User {
 		setPassword(password);
 	}
 	
-	public User(String userId, String name, String password, Info info, Stat stat) {
-		setUserId(userId);
-		setName(name);
-		setPassword(password);
-		setInfo(info);
-		setStat(stat);
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private Long id;
+	
 	@Column(name = "USER_ID")
 	private String userId;
 	
@@ -46,18 +42,10 @@ public class User {
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Stat> stat;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Info> info;
 
-	public void setInfo(Info info) {
-		
-	}
-
-	public void setStat(Stat stat) {
-		
-	}
-	
 }
