@@ -12,6 +12,7 @@ import com.oknym.helperball.model.User;
 import com.oknym.helperball.service.HelperballService;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping(value = "/hb/v1")
@@ -71,9 +72,12 @@ public class HelperballHandler {
 	
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	@ApiOperation(value = "Save User", notes = "Save User")
-	public void saveUser(@RequestBody User user) {
+	public void saveUser(
+			@ApiParam("userId") String userId,
+			@ApiParam("name") @RequestParam(required = true) String name,
+			@ApiParam("password") @RequestParam(required = true) String password) {
 		HelperballService helperballService = getHelperballService();
-		helperballService.save(user);
+		helperballService.save(userId, name, password);
 	}
 	
 	@RequestMapping(value = "/user/authentication", method = RequestMethod.POST)

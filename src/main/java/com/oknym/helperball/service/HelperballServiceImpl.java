@@ -93,25 +93,19 @@ public class HelperballServiceImpl implements HelperballService {
 	}
 	
 	@Override
-	public void save(User user) {		
-		System.out.println(user.getUserId());
-		System.out.println(user.getName());
-		System.out.println(user.getPassword());
-		
+	public void save(String userId, String name, String password) {		
 		Info info = new Info();
 		Stat stat = new Stat();
-		User usersave = new User();
-		
-		info.setUser(user.getUserId());
-		stat.setUser(user.getUserId());
+		User user = new User();
 
-		usersave.setUserId(user.getUserId());
-		usersave.setName(user.getName());
-		usersave.setPassword(user.getPassword());
-		usersave.setInfo(info);
-		usersave.setStat(stat);
+		user.setUserId(userId);
+		user.setName(name);
+		user.setPassword(password);
 		
-		userRepository.save(usersave);
+		info.setUser(user);
+		stat.setUser(user);
+		
+		userRepository.save(user);
 		infoRepository.save(info);
 		statRepository.save(stat);
 	}
@@ -133,11 +127,11 @@ public class HelperballServiceImpl implements HelperballService {
 	}
 	
 	@Override
-	public User authenticationUserId(String id) {
-		if (userRepository.findByUserId(id) == null) {
+	public User authenticationUserId(String userId) {
+		if (userRepository.findByUserId(userId) == null) {
 			return null;
 		} else {
-			return userRepository.findByUserId(id);
+			return userRepository.findByUserId(userId);
 		}
 	}
 	
