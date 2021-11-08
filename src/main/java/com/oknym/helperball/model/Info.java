@@ -1,9 +1,8 @@
 package com.oknym.helperball.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +36,7 @@ public class Info {
 	@Column(name = "AGE")
 	private int age;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID")
 	@JsonBackReference
 	private User user;
@@ -49,9 +48,5 @@ public class Info {
 	@ManyToOne
 	@JoinColumn(name = "FOOT_ID")
 	private Foot foot;
-
-	public void setUser(String userId) {
-		
-	}
-
+	
 }
