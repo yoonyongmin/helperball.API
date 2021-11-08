@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import com.oknym.helperball.model.User;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, String> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
-	@Query("SELECT u FROM User u WHERE u.userId=:id")
-	User findByUserId(String id);
+	@Query("SELECT u FROM User u WHERE u.userId=:userId")
+	User findByUserId(String userId);
 	
 }
