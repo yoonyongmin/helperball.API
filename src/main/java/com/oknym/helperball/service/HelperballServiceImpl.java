@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.oknym.helperball.model.Stat;
 import com.oknym.helperball.model.User;
+import com.oknym.helperball.request.UserRequest;
 
 @Service
 @Transactional
@@ -97,6 +98,19 @@ public class HelperballServiceImpl implements HelperballService {
 		message.setSubject("헬퍼볼 인증 확인 메일입니다.");
 		message.setText("헬퍼볼 가입을 환영합니다! 인증번호를 확인하세요");
 		javaMailSender.send(message);
+	}
+	
+	@Override
+	public User saveInfo(UserRequest userRequest, String userId) {
+		
+		User user = userRepository.findByUserId(userId);
+		user.setHeight(userRequest.getHeight());
+		user.setWeight(userRequest.getWeight());
+		user.setAge(userRequest.getAge());
+		user.setFoot(userRequest.getFoot());
+		user.setPosition(userRequest.getPosition());
+		
+		return user;
 	}
 	
 //	@Override
