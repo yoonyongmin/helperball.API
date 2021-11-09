@@ -9,9 +9,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.oknym.helperball.model.Foot;
-import com.oknym.helperball.model.Info;
-import com.oknym.helperball.model.Position;
 import com.oknym.helperball.model.Stat;
 import com.oknym.helperball.model.User;
 
@@ -40,33 +37,6 @@ public class HelperballServiceImpl implements HelperballService {
 		return this.statRepository;
 	}
 	
-	InfoRepository infoRepository;
-	@Autowired
-	public void setInfoRepository(InfoRepository infoRepository) {
-		this.infoRepository = infoRepository;
-	}
-	public InfoRepository getInfoRepository() {
-		return this.infoRepository;
-	}
-	
-	PositionRepository positionRepository;
-	@Autowired
-	public void setPositonRepository(PositionRepository positionRepository) {
-		this.positionRepository = positionRepository;
-	}
-	public PositionRepository getPositionRepository() {
-		return this.positionRepository;
-	}
-	
-	FootRepository footRepository;
-	@Autowired
-	public void setFootRepository(FootRepository footRepository) {
-		this.footRepository = footRepository;
-	}
-	public FootRepository getFootRepository() {
-		return this.footRepository;
-	}
-	
 	@Override
 	public List<User> selectUser() {
 		return (List<User>) userRepository.findAll();
@@ -76,25 +46,9 @@ public class HelperballServiceImpl implements HelperballService {
 	public List<Stat> selectStat() {
 		return (List<Stat>) statRepository.findAll();
 	}
-
-	@Override
-	public List<Info> selectInfo() {
-		return (List<Info>) infoRepository.findAll();
-	}
-	
-	@Override
-	public List<Position> selectPosition() {
-		return (List<Position>) positionRepository.findAll();
-	}
-	
-	@Override
-	public List<Foot> selectFoot() {
-		return (List<Foot>) footRepository.findAll();
-	}
 	
 	@Override
 	public void save(String userId, String name, String password) {		
-		Info info = new Info();
 		Stat stat = new Stat();
 		User user = new User();
 
@@ -102,11 +56,9 @@ public class HelperballServiceImpl implements HelperballService {
 		user.setName(name);
 		user.setPassword(password);
 		
-		info.setUser(user);
 		stat.setUser(user);
 		
 		userRepository.save(user);
-		infoRepository.save(info);
 		statRepository.save(stat);
 	}
 	

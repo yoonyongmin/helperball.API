@@ -44,8 +44,5 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Stat> stat;
-
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Info> info;
-
+	
 }

@@ -45,30 +45,6 @@ public class HelperballHandler {
 		
 		return ResponseEntity.ok(helperballService.selectStat());
 	}
-
-	@RequestMapping(value = "/info", method = RequestMethod.GET)
-	@ApiOperation(value = "Read Info List", notes = "Read Info List")
-	public ResponseEntity<?> selectInfo() {
-		HelperballService helperballService = getHelperballService();
-		
-		return ResponseEntity.ok(helperballService.selectInfo());
-	}
-	
-	@RequestMapping(value = "/position", method = RequestMethod.GET)
-	@ApiOperation(value = "Read Position List", notes = "Read Position List")
-	public ResponseEntity<?> selectPosition() {
-		HelperballService helperballService = getHelperballService();
-		
-		return ResponseEntity.ok(helperballService.selectPosition());
-	}
-	
-	@RequestMapping(value = "/foot", method = RequestMethod.GET)
-	@ApiOperation(value = "Read Foot List", notes = "Read Foot List")
-	public ResponseEntity<?> selectFoot() {
-		HelperballService helperballService = getHelperballService();
-		
-		return ResponseEntity.ok(helperballService.selectFoot());
-	}
 	
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	@ApiOperation(value = "Save User", notes = "Save User")
