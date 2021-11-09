@@ -1,14 +1,16 @@
 package com.oknym.helperball.request;
 
-@SuppressWarnings("unused")
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class UserRequest {
 	
-	public UserRequest(Long id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-	
-	private Long id;
-	private String name;
+	private int height;
+	private int weight;
+	private int age;
+	private String foot;
+	private String position;
 	
 }
