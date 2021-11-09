@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oknym.helperball.model.User;
+import com.oknym.helperball.request.UserRequest;
 import com.oknym.helperball.service.HelperballService;
 
 import io.swagger.annotations.ApiOperation;
@@ -81,27 +82,16 @@ public class HelperballHandler {
 		helperballService.sendMail(email, name, certification);
 	}
 	
-//	@RequestMapping(value = "/info", method = RequestMethod.POST)
-//	@ApiOperation(value = "Create User", notes = "Create User")
-//	public ResponseEntity<?> saveInfo(@ApiParam(name = "weight") int weight,
-//										@ApiParam(name = "height") int height,
-//										@ApiParam(name = "foot") String foot,
-//										@ApiParam(name = "position") String position) {
-//		System.out.println(weight);
-//		System.out.println(height);
-//		System.out.println(foot);
-//		System.out.println(position);
-//
-//		
-//		HelperballService helperballService = getHelperballService();
-//		InfoRequest infoRequest = new InfoRequest();
-//		infoRequest.setWeight(weight);
-//		infoRequest.setHeight(height);
-//		infoRequest.setFoot(foot);
-//		infoRequest.setPosition(position);
-//		
-//		return ResponseEntity.ok(helperballService.saveInfo(infoRequest));
-//	}
+	@RequestMapping(value = "/info", method = RequestMethod.POST)
+	@ApiOperation(value = "Create User", notes = "Create User")
+	public ResponseEntity<?> saveInfo(
+			@RequestBody UserRequest userRequest,
+			@RequestParam(name = "userId") String userId) {
+		HelperballService helperballService = getHelperballService();
+		User user = helperballService.saveInfo(userRequest, userId);
+		
+		return ResponseEntity.ok(user);
+	}
 	
 //	@RequestMapping(value = "/info", method = RequestMethod.PUT)
 //	@ApiOperation(value = "Save User Info", notes = "Save User Info")
