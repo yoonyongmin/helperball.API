@@ -28,6 +28,7 @@ public class User {
 		setPassword(password);
 	}
 	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -41,6 +42,21 @@ public class User {
 
 	@Column(name = "PASSWORD")
 	private String password;
+	
+	@Column(name = "WEIGHT")
+	private int weight;
+	
+	@Column(name = "HEIGHT")
+	private int height;
+	
+	@Column(name = "AGE")
+	private int age;
+	
+	@Column(name = "FOOT")
+	private String foot;
+	
+	@Column(name = "POSITION")
+	private String position;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Stat> stat;
