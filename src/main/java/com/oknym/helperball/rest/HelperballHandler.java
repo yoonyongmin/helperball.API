@@ -57,6 +57,18 @@ public class HelperballHandler {
 		helperballService.save(userId, name, password);
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@ApiOperation(value = "Login", notes = "Login")
+	public ResponseEntity<?> login(
+			@RequestParam(name = "userId") String userId,
+			@RequestParam(name = "password") String password) {
+		try {
+			return null;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 	@RequestMapping(value = "/user/authentication", method = RequestMethod.POST)
 	@ApiOperation(value = "Save User", notes = "Save User")
 	public ResponseEntity<?> doubleCheckUserId(@RequestParam(name = "id") String id) {
