@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,35 +61,6 @@ public class HelperballHandler {
 			@ApiParam("password") @RequestParam(required = true) String password) {
 		HelperballService helperballService = getHelperballService();
 		helperballService.save(userId, name, password);
-	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	@ApiOperation(value = "Login", notes = "Login")
-	public ResponseEntity<?> login(
-			@RequestParam(name = "userId") String userId,
-			@RequestParam(name = "password") String password,
-			HttpServletRequest request, 
-			HttpServletResponse response) {
-		try {
-			HelperballService helperballService = getHelperballService();
-			User user = helperballService.verifyUser(userId, password);
-			
-			System.out.println(user);
-			HttpHeaders headers = new HttpHeaders();
-			
-			if (user != null) {
-				
-				String userAccessKey = UUID.randomUUID().toString();
-				String userSecretKey = UUID.randomUUID().toString();
-				
-				headers.add("AccessKey", userAccessKey);
-				headers.add("SecretKey", userSecretKey);
-			}
-			
-			return ResponseEntity.created(null).headers(headers).body(user);
-		} catch (Exception e) {
-			return null;
-		}
 	}
 	
 	@RequestMapping(value = "/user/authentication", method = RequestMethod.POST)
