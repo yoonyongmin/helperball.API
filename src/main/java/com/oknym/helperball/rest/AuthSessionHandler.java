@@ -1,6 +1,7 @@
 package com.oknym.helperball.rest;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,17 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oknym.helperball.model.User;
+import com.oknym.helperball.model.session.AuthSession;
 import com.oknym.helperball.service.HelperballService;
+import com.oknym.helperball.service.auth.AuthSessionService;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.ResponseHeader;
@@ -114,11 +118,15 @@ public class AuthSessionHandler {
 			@ApiResponse(code = 404, message = "Can't find user", response = Boolean.class), 
 	})
 	public ResponseEntity<?> login(
-			@RequestParam(name = "userId") String userId,
-			@RequestParam(name = "password") String password,
+			@ApiParam("userId") String userId,
+			@ApiParam("password") String password,
 			@RequestBody HashMap<String, String> userCredential,
 			HttpServletRequest request, 
 			HttpServletResponse response) {
+		
+		System.out.println(userId);
+		System.out.println(password);
+		System.out.println(userCredential);
 		
 		if(userId == null) {
 			userId = userCredential.get("userId");
@@ -131,6 +139,9 @@ public class AuthSessionHandler {
 			HelperballService helperballService = getHelperballService();
 			User user = helperballService.verifyUser(userId, password);
 			
+			AuthSessionService authSessionService = getAuthSessionService();
+			List<AuthSession> 
+			
 			System.out.println(user);
 			HttpHeaders headers = new HttpHeaders();
 			
@@ -139,13 +150,20 @@ public class AuthSessionHandler {
 				String userAccessKey = UUID.randomUUID().toString();
 				String userSecretKey = UUID.randomUUID().toString();
 				
-				headers.add("AccessKey", userAccessKey);
-				headers.add("SecretKey", userSecretKey);
+				headers.add(HeaderAccessKey, userAccessKey);
+				headers.add(HeaderSecretKey, userSecretKey);
+				return ResponseEntity.created(null).headers(headers).body(user);
+			} else {
+				AuthSession session = userAccessList.get(0);
+				
+				headers.add(HeaderAccessKey, session.getUserAccess());
+				headers.add(HeaderSecretKey, session.getUserSecret());
+				
+				return ResponseEntity.status(HttpStatus.OK).headers(headers).body(user);
 			}
-			
-			return ResponseEntity.created(null).headers(headers).body(user);
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		} catch (Exception e) {
-			return null;
+			return ResponseEntity.notFound().build();
 		}
 	}
 	
