@@ -76,6 +76,17 @@ public class AuthSessionHandler {
 		return this.helperballService;
 	}
 	
+	private AuthSessionService authSessionService;
+	
+	@Autowired
+	public void setAuthSessionService(AuthSessionService authSessionService) {
+		this.authSessionService = authSessionService;
+	}
+	
+	public AuthSessionService getAuthSessionService() {
+		return this.authSessionService;
+	}
+	
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ApiOperation(value = "Login", notes = "Login")
