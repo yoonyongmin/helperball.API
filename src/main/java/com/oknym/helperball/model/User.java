@@ -55,6 +55,9 @@ public class User {
 	@Column(name = "FOOT")
 	private String foot;
 	
+	@Column(name = "STATUS")
+	private String status;
+	
 	@Column(name = "POSITION")
 	private String position;
 	
