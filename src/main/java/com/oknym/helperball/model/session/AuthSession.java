@@ -42,7 +42,7 @@ public class AuthSession {
 	@Column(name = "LAST_ACCESS_TIME")
 	private Date lastAccessTime;
 	
-	@Column(name = "EXPIRED_DATE")
+	@Column(name = "EXPIRE_DATE")
 	private Date expireDate;
 
 }
