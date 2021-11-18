@@ -15,7 +15,7 @@ public interface HelperballService {
 	User saveInfo(UserRequest userRequest, String userId);
 	
 	User oauthUserAuthentication(User user);
-	User authenticationUserId(String id);
+	User authenticationUserId(String userId);
 	User verifyUser(String userId, String password);
 	
 	void sendMail(String email, String name, String certification);
