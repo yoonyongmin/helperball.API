@@ -1,6 +1,8 @@
 package com.oknym.helperball.model.session;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +19,31 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AuthSession {
+	public final static int defaultExpireInterval = 30;
 	
 	public AuthSession() {
 		
 	}
 	
+	public AuthSession(String userId) {
+		
+	}
+	
+	public AuthSession(String userId, String userAccessKey, String userSecretKey, SessionStatusType status) {
+		super();
+		
+		setUserId(userId);
+		setUserAccess(userAccessKey);
+		setUserSecret(userSecretKey);
+		setStatus(status);
+		
+		setLastAccessTime(GregorianCalendar.getInstance().getTime());
+		
+		Calendar expireDate = GregorianCalendar.getInstance();
+		expireDate.add(Calendar.MINUTE, defaultExpireInterval);
+		setExpireDate(expireDate.getTime());
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")

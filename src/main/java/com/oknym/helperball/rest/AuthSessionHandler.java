@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.oknym.helperball.model.User;
 import com.oknym.helperball.model.session.AuthSession;
+import com.oknym.helperball.model.session.SessionStatusType;
 import com.oknym.helperball.service.HelperballService;
 import com.oknym.helperball.service.auth.AuthSessionService;
 
@@ -91,7 +92,6 @@ public class AuthSessionHandler {
 		return this.authSessionService;
 	}
 	
-
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ApiOperation(value = "Login", notes = "Login")
 	@ApiResponses(value = {
@@ -139,31 +139,46 @@ public class AuthSessionHandler {
 			HelperballService helperballService = getHelperballService();
 			User user = helperballService.verifyUser(userId, password);
 			
-			AuthSessionService authSessionService = getAuthSessionService();
-			List<AuthSession> 
-			
-			System.out.println(user);
-			HttpHeaders headers = new HttpHeaders();
-			
 			if (user != null) {
-				
-				String userAccessKey = UUID.randomUUID().toString();
-				String userSecretKey = UUID.randomUUID().toString();
-				
-				headers.add(HeaderAccessKey, userAccessKey);
-				headers.add(HeaderSecretKey, userSecretKey);
-				return ResponseEntity.created(null).headers(headers).body(user);
-			} else {
-				AuthSession session = userAccessList.get(0);
-				
-				headers.add(HeaderAccessKey, session.getUserAccess());
-				headers.add(HeaderSecretKey, session.getUserSecret());
-				
-				return ResponseEntity.status(HttpStatus.OK).headers(headers).body(user);
+				if (user.getStatus().equals("Disabled")) {
+					return ResponseEntity.status(HttpStatus.LOCKED).build();
+				} else if (user.getStatus().equals("Deleted")) {
+					return ResponseEntity.status(HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS).build();
+				} else {
+					AuthSessionService authSessionService = getAuthSessionService();
+					List<AuthSession> userAccessList = authSessionService.selectActiveSession(new AuthSession(user.getUserId()));
+					
+					HttpHeaders headers = new HttpHeaders();
+					
+					if (userAccessList == null || userAccessList.size() == 0) {
+						String userAccessKey = UUID.randomUUID().toString();
+						String userSecretKey = UUID.randomUUID().toString();
+						
+						headers.add(HeaderAccessKey, userAccessKey);
+						headers.add(HeaderSecretKey, userSecretKey);
+						headers.add("test", "test");
+						
+						AuthSession userAccess = new AuthSession(user.getUserId(), userAccessKey, userSecretKey, SessionStatusType.Enabled);
+						authSessionService.create(userAccess);
+						
+						System.out.println(headers);
+						System.out.println(headers.get("AccessKey"));
+						System.out.println(headers.get(HeaderSecretKey));
+						
+						return ResponseEntity.created(null).headers(headers).body(user);
+					} else {
+						AuthSession session = userAccessList.get(0);
+						
+						headers.add(HeaderAccessKey, session.getUserAccess());
+						headers.add(HeaderSecretKey, session.getUserSecret());
+						
+						return ResponseEntity.status(HttpStatus.OK).headers(headers).body(user);
+					}
+				}
 			}
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-		} catch (Exception e) {
 			return ResponseEntity.notFound().build();
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 	
