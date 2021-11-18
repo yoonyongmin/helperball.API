@@ -59,10 +59,10 @@ public class HelperballHandler {
 	
 	@RequestMapping(value = "/user/authentication", method = RequestMethod.POST)
 	@ApiOperation(value = "Save User", notes = "Save User")
-	public ResponseEntity<?> doubleCheckUserId(@RequestParam(name = "id") String id) {
+	public ResponseEntity<?> doubleCheckUserId(@RequestParam(name = "userId") String userId) {
 		HelperballService helperballService = getHelperballService();
-		
-		return ResponseEntity.ok(helperballService.authenticationUserId(id));
+		System.out.println(userId);
+		return ResponseEntity.ok(helperballService.authenticationUserId(userId));
 	}
 
 	@RequestMapping(value = "/user/oauth", method = RequestMethod.POST)
